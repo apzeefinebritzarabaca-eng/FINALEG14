@@ -1,0 +1,767 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIXEL PALS - FISHPALS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Luckiest+Guy&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ocean:#06394d;
+  --deep:#021c32;
+  --blue:#087e9e;
+  --aqua:#66e1db;
+  --orange:#ff974b;
+  --cream:#fff0d2;
+  --pink:#ff8295;
+}
+
+* {box-sizing:border-box}
+
+body {
+  margin:0;
+  font-family:'Fredoka',sans-serif;
+  background:var(--deep);
+  color:var(--cream);
+  overflow:hidden;
+}
+
+.presentation {
+  width:100%;
+  height:100vh;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% 110%,#1384a0 0%,transparent 48%),
+    radial-gradient(ellipse at 10% 10%,#0b607b,transparent 40%),
+    linear-gradient(140deg,#052c45,#02182e);
+}
+
+/* UNDERWATER BACKGROUND */
+
+.water {
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:repeating-linear-gradient(
+    110deg,
+    transparent 0px,
+    #ffffff05 40px,
+    transparent 80px
+  );
+  animation:watermove 12s linear infinite;
+}
+
+@keyframes watermove {
+  to {background-position:300px 0}
+}
+
+.bubble {
+  position:absolute;
+  border:3px solid #b7f7ff77;
+  border-radius:50%;
+  box-shadow:inset 0 0 12px #ffffff66;
+  animation:rise 8s infinite ease-in;
+  pointer-events:none;
+}
+
+@keyframes rise {
+  0% {transform:translateY(100vh) scale(.7);opacity:0}
+  20% {opacity:.8}
+  100% {transform:translateY(-150px) scale(1.2);opacity:0}
+}
+
+.b1 {width:35px;height:35px;left:8%;animation-delay:0s}
+.b2 {width:20px;height:20px;left:28%;animation-delay:2s}
+.b3 {width:55px;height:55px;left:70%;animation-delay:1s}
+.b4 {width:25px;height:25px;left:90%;animation-delay:4s}
+.b5 {width:15px;height:15px;left:48%;animation-delay:3s}
+
+.fish {
+  position:absolute;
+  z-index:1;
+  font-size:75px;
+  pointer-events:none;
+  filter:drop-shadow(0 12px 8px #001b2b99);
+}
+
+.fish-a {
+  top:7%;right:3%;
+  animation:swim 7s ease-in-out infinite;
+}
+
+.fish-b {
+  bottom:12%;left:2%;
+  font-size:90px;
+  animation:swim2 9s ease-in-out infinite;
+}
+
+.fish-c {
+  top:45%;right:2%;
+  font-size:50px;
+  animation:swim 8s infinite;
+}
+
+.fish-d {
+  bottom:35%;left:5%;
+  font-size:45px;
+  animation:swim2 6s infinite;
+}
+
+@keyframes swim {
+  0%,100% {transform:translate(0,0) rotate(-10deg)}
+  50% {transform:translate(-35px,25px) rotate(10deg)}
+}
+
+@keyframes swim2 {
+  0%,100% {transform:translate(0,0) scaleX(-1)}
+  50% {transform:translate(35px,-25px) scaleX(-1) rotate(10deg)}
+}
+
+/* SEAWEED */
+
+.seaweed {
+  position:absolute;
+  bottom:-30px;
+  font-size:95px;
+  pointer-events:none;
+  animation:sway 4s ease-in-out infinite alternate;
+}
+
+.sea-left {left:-10px}
+.sea-right {right:-10px;animation-delay:1s}
+
+@keyframes sway {
+  from {transform:rotate(-8deg)}
+  to {transform:rotate(8deg)}
+}
+
+/* SLIDES */
+
+.slide {
+  display:none;
+  height:100%;
+  overflow-y:auto;
+  position:relative;
+  z-index:2;
+  padding:65px 9% 120px;
+  animation:appear .55s ease;
+}
+
+.slide.active {display:block}
+
+@keyframes appear {
+  from {opacity:0;transform:translateY(30px)}
+  to {opacity:1;transform:translateY(0)}
+}
+
+.kicker {
+  color:var(--aqua);
+  font-size:13px;
+  font-weight:bold;
+  letter-spacing:4px;
+}
+
+h1 {
+  font-family:'Luckiest Guy',cursive;
+  font-size:clamp(48px,8vw,105px);
+  color:var(--orange);
+  line-height:.98;
+  text-shadow:
+    5px 6px 0 #a84337,
+    9px 10px 0 #001d34;
+  margin:20px 0;
+  transform:rotate(-2deg);
+}
+
+h2 {
+  color:#ffd18d;
+  font-size:clamp(25px,4vw,42px);
+}
+
+h3 {color:var(--aqua)}
+
+p,li {
+  font-size:17px;
+  line-height:1.7;
+  color:#e5fafa;
+}
+
+.big {
+  font-size:clamp(21px,3vw,29px);
+}
+
+.card {
+  background:linear-gradient(135deg,#ffffff20,#ffffff08);
+  border:2px solid #a5f5f477;
+  border-radius:28px;
+  padding:23px;
+  margin:17px 0;
+  box-shadow:0 15px 30px #001a2a55;
+  backdrop-filter:blur(10px);
+  position:relative;
+  overflow:hidden;
+}
+
+.card:after {
+  content:"✦";
+  position:absolute;
+  top:8px;
+  right:17px;
+  color:#ffb45c;
+  font-size:25px;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:16px;
+}
+
+.koi-card {
+  background:var(--cream);
+  color:var(--ocean);
+  border:6px solid var(--orange);
+  border-radius:40% 50% 35% 50%;
+  padding:20px;
+  text-align:center;
+  transform:rotate(-2deg);
+  box-shadow:9px 12px 0 #a74a38;
+}
+
+.koi-card h2,.koi-card p {
+  color:var(--ocean);
+}
+
+.koi-card:nth-child(even) {
+  transform:rotate(2deg);
+  border-color:var(--pink);
+}
+
+.logo {
+  font-family:'Luckiest Guy',cursive;
+  font-size:clamp(55px,10vw,125px);
+  color:var(--orange);
+  text-align:center;
+  text-shadow:6px 7px #a84337,10px 12px #00182a;
+  animation:bob 3s infinite ease-in-out;
+}
+
+@keyframes bob {
+  50% {transform:translateY(-10px) rotate(2deg)}
+}
+
+.tagline {
+  font-size:clamp(19px,3vw,32px);
+  font-weight:bold;
+  text-align:center;
+  color:#fff0d2;
+}
+
+button {
+  background:var(--orange);
+  color:#17364a;
+  font-family:inherit;
+  font-size:15px;
+  font-weight:700;
+  padding:14px 23px;
+  border:3px solid #ffcb87;
+  border-radius:40px;
+  cursor:pointer;
+  margin:6px;
+  box-shadow:0 5px 0 #a94b38;
+  transition:.2s;
+}
+
+button:hover {
+  transform:translateY(-5px) rotate(-2deg);
+  background:#fff0cf;
+}
+
+.secondary {
+  background:#087e9e;
+  color:white;
+  border-color:#85e8e3;
+  box-shadow:0 5px 0 #03475f;
+}
+
+.result {
+  padding:16px;
+  border:2px dashed var(--aqua);
+  border-radius:18px;
+  background:#001e334f;
+  margin-top:14px;
+  min-height:35px;
+}
+
+.navigation {
+  position:absolute;
+  bottom:0;
+  z-index:20;
+  width:100%;
+  padding:12px;
+  background:#001b2eeF;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+#counter {
+  padding:10px;
+  color:var(--aqua);
+  font-weight:bold;
+}
+
+input {
+  width:100%;
+  padding:13px;
+  border-radius:12px;
+  border:2px solid var(--orange);
+  font:inherit;
+}
+
+.progress {
+  position:absolute;
+  top:0;
+  left:0;
+  height:6px;
+  background:var(--orange);
+  width:11.11%;
+  z-index:30;
+  transition:.3s;
+}
+
+.stamp {
+  display:inline-block;
+  background:var(--pink);
+  color:#12344b;
+  padding:9px 18px;
+  font-weight:bold;
+  transform:rotate(-5deg);
+  border-radius:8px;
+}
+
+@media(max-width:600px) {
+  .slide {padding:40px 6% 125px}
+  p,li {font-size:15px}
+  .card {padding:17px}
+  .fish {font-size:45px}
+}
+</style>
+</head>
+
+<body>
+<div class="presentation">
+
+<div class="progress" id="progress"></div>
+<div class="water"></div>
+
+<div class="bubble b1"></div>
+<div class="bubble b2"></div>
+<div class="bubble b3"></div>
+<div class="bubble b4"></div>
+<div class="bubble b5"></div>
+
+<div class="fish fish-a">🐟</div>
+<div class="fish fish-b">🐠</div>
+<div class="fish fish-c">🐟</div>
+<div class="fish fish-d">🐠</div>
+
+<div class="seaweed sea-left">🌿</div>
+<div class="seaweed sea-right">🌿</div>
+
+<!-- 1 COVER -->
+<section class="slide active">
+<div class="kicker">WELCOME TO OUR UNDERWATER WORLD</div>
+
+<div style="font-size:85px;text-align:center">🐠 🫧 🐟</div>
+
+<div class="logo">PIXEL PALS</div>
+
+<p class="tagline">
+SCHOOLS OUT, BUT EVERYONES STUCK IN THE HALLWAY.
+</p>
+
+<div class="card" style="text-align:center">
+<h2>WELCOME, FISHPALS!</h2>
+<p class="big">
+A little creativity, a lot of fish,
+and a bigger purpose beneath the surface.
+</p>
+<span class="stamp">DIVE IN!</span>
+</div>
+
+<button onclick="go(1)">LET'S SWIM →</button>
+</section>
+
+<!-- 2 BRANDING -->
+<section class="slide">
+<div class="kicker">01 / BRANDING & IDENTITY</div>
+<h1>WHO ARE WE?</h1>
+
+<div class="grid">
+<div class="koi-card">
+<div style="font-size:65px">🐟</div>
+<h2>PIXEL PALS</h2>
+<p>Our official group brand.</p>
+</div>
+<div class="koi-card">
+<div style="font-size:65px">🐠</div>
+<h2>FISHPALS</h2>
+<p>Our YouTube identity.</p>
+</div>
+</div>
+
+<div class="card">
+<h2>Our brand personality</h2>
+<p>
+Pixel Pals represents creativity, teamwork,
+and digital expression. We use a playful aquatic
+identity to make our group recognizable and
+memorable.
+</p>
+</div>
+</section>
+
+<!-- 3 LOGO -->
+<section class="slide">
+<div class="kicker">02 / LOGO CONCEPT</div>
+<h1>OUR SIGNATURE LOOK!</h1>
+
+<div class="card" style="text-align:center">
+<div style="font-size:110px">🐟</div>
+<div class="logo" style="font-size:clamp(50px,9vw,100px)">PIXEL PALS</div>
+<h2>CREATIVITY SWIMS HERE</h2>
+</div>
+
+<div class="grid">
+<div class="card">
+<h3>🧡 ORANGE</h3>
+<p>Energy, creativity, and excitement.</p>
+</div>
+<div class="card">
+<h3>💙 BLUE</h3>
+<p>Water, calmness, and aquatic life.</p>
+</div>
+<div class="card">
+<h3>🤍 WHITE</h3>
+<p>Clarity and simplicity.</p>
+</div>
+</div>
+
+<p>Our initial logo concept combines koi fish
+with bold digital-inspired lettering.</p>
+</section>
+
+<!-- 4 TAGLINE -->
+<section class="slide">
+<div class="kicker">03 / OUR MESSAGE</div>
+<h1>THE BIG LINE!</h1>
+
+<div class="card" style="text-align:center">
+<div style="font-size:100px">🐠 🐟 🐠</div>
+<h2 style="font-size:clamp(30px,5vw,55px)">
+SCHOOLS OUT, BUT EVERYONES STUCK IN THE HALLWAY.
+</h2>
+<p>
+A playful, school-related tagline that gives our
+identity a recognizable voice.
+</p>
+</div>
+
+<h2>WHY DOES IT WORK?</h2>
+<ul>
+<li>Easy to remember.</li>
+<li>Relatable to our intended audience.</li>
+<li>Gives the brand a playful personality.</li>
+</ul>
+</section>
+
+<!-- 5 AUDIENCE -->
+<section class="slide">
+<div class="kicker">04 / AUDIENCE RECOGNITION</div>
+<h1>WHO ARE WE TALKING TO?</h1>
+
+<div class="grid">
+<div class="card">
+<div style="font-size:60px">🎒</div>
+<h2>STUDENTS</h2>
+<p>Our primary audience. We aim to share
+relatable and educational content.</p>
+</div>
+<div class="card">
+<div style="font-size:60px">🏫</div>
+<h2>SCHOOL COMMUNITY</h2>
+<p>Teachers and other school members can
+also connect with our message.</p>
+</div>
+</div>
+
+<div class="card">
+<h2>HOW DO WE GET RECOGNIZED?</h2>
+<ul>
+<li>Keep our logo consistent.</li>
+<li>Use recognizable colors.</li>
+<li>Share relatable content.</li>
+<li>Maintain the same identity across platforms.</li>
+</ul>
+</div>
+</section>
+
+<!-- 6 DIGITAL PRESENCE -->
+<section class="slide">
+<div class="kicker">05 / DIGITAL PRESENCE</div>
+<h1>WE'RE ONLINE!</h1>
+
+<div class="card" style="text-align:center">
+<div style="font-size:105px">🐟</div>
+<div class="logo" style="font-size:75px">FISHPALS</div>
+<h2>OUR YOUTUBE IDENTITY</h2>
+<button onclick="document.getElementById('channel').innerHTML='Fishpals is our YouTube name, where our group can share videos and connect with viewers.'">
+EXPLORE FISHPALS
+</button>
+<div class="result" id="channel">
+Click to discover our digital identity.
+</div>
+</div>
+
+<p>Our digital presence helps people find,
+recognize, and engage with our content.</p>
+</section>
+
+<!-- 7 BRAINSTORM -->
+<section class="slide">
+<div class="kicker">06 / BRAND BRAINSTORMING</div>
+<h1>LET'S PICK OUR IDENTITY!</h1>
+
+<div class="card">
+<h2>Possible brand names</h2>
+<button onclick="pick('Pixel Pals')">PIXEL PALS</button>
+<button onclick="pick('Koi Crew')">KOI CREW</button>
+<button onclick="pick('Fishpals')">FISHPALS</button>
+<div class="result" id="pickResult">Choose a possible name!</div>
+</div>
+
+<div class="card">
+<h2>Logo ideas</h2>
+<button onclick="logoIdea('A koi fish with pixel-inspired scales')">PIXEL KOI</button>
+<button onclick="logoIdea('A group of colorful fish swimming together')">FISH SQUAD</button>
+<button onclick="logoIdea('A fish inside a digital screen')">DIGITAL FISH</button>
+<div class="result" id="logoResult">Explore our logo ideas!</div>
+</div>
+
+<div class="card">
+<h2>Tagline options</h2>
+<button onclick="tag('Schools out, but everyones stuck in the hallway.')">OUR TAGLINE</button>
+<button onclick="tag('Swimming through ideas, one pixel at a time.')">ALTERNATIVE</button>
+<div class="result" id="tagResult">Compare our slogans!</div>
+</div>
+</section>
+
+<!-- 8 OVERCROWDING -->
+<section class="slide">
+<div class="kicker">07 / OUR ADVOCACY</div>
+<h1>TOO MANY FISH!</h1>
+
+<div style="font-size:clamp(45px,8vw,85px);text-align:center">
+🐟🐟🐟🐟🐟🐟🐟
+</div>
+
+<div class="card">
+<h2>WHAT IS OVERCROWDING?</h2>
+<p>
+Fish overcrowding happens when too many fish
+are kept in a tank that does not provide enough
+space and resources for their needs.
+</p>
+<p>
+Some fish owners add more fish to save space
+or accommodate more animals. However, a tank
+has limits, and ignoring them can harm aquatic life.
+</p>
+</div>
+
+<div class="card">
+<h2>THE REALITY</h2>
+<p>
+A tank is not healthy just because it contains
+water and fish. Its size, water quality, filtration,
+and the needs of each species matter.
+</p>
+</div>
+
+<div class="stamp">SPACE MATTERS!</div>
+</section>
+
+<!-- 9 EFFECTS -->
+<section class="slide">
+<div class="kicker">08 / THE CONSEQUENCES</div>
+<h1>THE HIDDEN PROBLEM!</h1>
+
+<div class="grid">
+<div class="card">
+<div style="font-size:55px">💧</div>
+<h2>POOR WATER QUALITY</h2>
+<p>More fish produce more waste, which can
+cause harmful ammonia buildup.</p>
+</div>
+
+<div class="card">
+<div style="font-size:55px">😟</div>
+<h2>STRESS</h2>
+<p>Limited space and competition can make
+fish stressed.</p>
+</div>
+
+<div class="card">
+<div style="font-size:55px">🦠</div>
+<h2>DISEASE RISKS</h2>
+<p>Poor conditions and stress can increase
+the risk of illness.</p>
+</div>
+
+<div class="card">
+<div style="font-size:55px">🌊</div>
+<h2>LESS SPACE</h2>
+<p>Fish may not have enough room to swim
+and behave naturally.</p>
+</div>
+</div>
+
+<div class="card">
+<h2>REMEMBER!</h2>
+<p class="big">
+More fish does not automatically mean
+a better aquarium.
+</p>
+</div>
+</section>
+
+<!-- 10 SOLUTIONS -->
+<section class="slide">
+<div class="kicker">09 / RESPONSIBLE FISH CARE</div>
+<h1>GIVE THEM ROOM!</h1>
+
+<div style="font-size:80px;text-align:center">🐠 💙 🐟</div>
+
+<div class="card">
+<h2>HOW CAN WE HELP?</h2>
+<ul>
+<li>Research each fish species before buying.</li>
+<li>Choose an appropriate tank size.</li>
+<li>Check water quality regularly.</li>
+<li>Maintain proper filtration.</li>
+<li>Avoid keeping more fish than the aquarium can support.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>QUICK FISH CARE QUIZ!</h2>
+<p>What should a responsible fish owner do?</p>
+
+<button onclick="answer(true)">A. Check tank capacity first</button>
+<button onclick="answer(false)">B. Add as many fish as possible</button>
+
+<div id="quiz" class="result">Choose your answer!</div>
+</div>
+</section>
+
+<!-- 11 FINAL -->
+<section class="slide">
+<div class="kicker">10 / OUR FINAL IDENTITY</div>
+
+<div style="font-size:80px;text-align:center">🐟 🫧 🐠</div>
+<div class="logo">PIXEL PALS</div>
+
+<h2 style="text-align:center">FISHPALS</h2>
+
+<div class="card" style="text-align:center">
+<h2>OUR MESSAGE TO EVERY FISH OWNER</h2>
+<p class="big">
+MORE FISH DOESN'T MEAN BETTER CARE.
+GIVE EVERY FISH ROOM TO LIVE.
+</p>
+</div>
+
+<div class="card">
+<h2>WHAT WE STAND FOR</h2>
+<p>
+We want to promote awareness about fish
+overcrowding and responsible aquatic care.
+Through Fishpals, we hope to remind people
+that every fish deserves a suitable and healthy
+environment.
+</p>
+</div>
+
+<h2>THANK YOU FOR SWIMMING WITH US!</h2>
+<button onclick="go(0)">↻ RESTART</button>
+</section>
+
+<!-- NAVIGATION -->
+<div class="navigation">
+<button class="secondary" onclick="move(-1)">← BACK</button>
+<span id="counter">1 / 11</span>
+<button onclick="move(1)">NEXT →</button>
+</div>
+
+</div>
+
+<script>
+let current=0;
+const slides=document.querySelectorAll('.slide');
+
+function update(){
+  slides.forEach((s,i)=>{
+    s.classList.toggle('active',i===current);
+  });
+
+  document.getElementById('counter').textContent=
+    (current+1)+' / '+slides.length;
+
+  document.getElementById('progress').style.width=
+    ((current+1)/slides.length*100)+'%';
+}
+
+function move(n){
+  current=Math.max(0,Math.min(slides.length-1,current+n));
+  update();
+}
+
+function go(n){
+  current=n;
+  update();
+}
+
+function pick(name){
+  document.getElementById('pickResult').textContent=
+    'Selected: '+name+'. Our final brand name is Pixel Pals!';
+}
+
+function logoIdea(name){
+  document.getElementById('logoResult').textContent=
+    'Logo concept: '+name;
+}
+
+function tag(name){
+  document.getElementById('tagResult').textContent=
+    'Tagline selected: '+name;
+}
+
+function answer(correct){
+  document.getElementById('quiz').innerHTML=correct
+  ? '🐟 CORRECT! Always consider the needs and capacity of your aquarium before adding fish.'
+  : '💧 Not quite! Too many fish can affect water quality and fish health. Try again!';
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight')move(1);
+  if(e.key==='ArrowLeft')move(-1);
+});
+</script>
+</body>
+</html>
